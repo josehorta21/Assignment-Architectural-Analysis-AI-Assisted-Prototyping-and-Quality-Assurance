@@ -1,0 +1,34 @@
+flowchart LR
+  subgraph U[Untrusted clients]
+    B[Public browser]
+    A[Admin UI - React + legacy Ember]
+    H[Headless API client]
+  end
+  subgraph E[Public edge - topology dependent]
+    N[NGINX / ingress]
+    C[Optional CDN cache]
+  end
+  subgraph G[Ghost Core - ONE Node.js process]
+    F[Express frontend / theme SSR]
+    AD[Admin API]
+    CO[Content API]
+    S[Domain services + models]
+    F --> S
+    AD --> S
+    CO --> S
+  end
+  subgraph P[Persistence and integrations]
+    DB[(MySQL 8 production)]
+    FS[(Media adapter)]
+    FX[Email / webhooks]
+  end
+  B --> N
+  A --> N
+  H --> N
+  N --> F
+  N --> AD
+  N --> CO
+  N -. public cache hits .-> C
+  S --> DB
+  S -. optional .-> FS
+  S -. optional .-> FX

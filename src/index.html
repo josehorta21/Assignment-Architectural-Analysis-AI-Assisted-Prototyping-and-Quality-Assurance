@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1120">
+  <meta name="description" content="GhostFlow Architecture Lab: an interactive, source-verified systems architecture explorer and QA companion PoC.">
+  <title>GhostFlow | Architecture Lab</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" aria-label="Primary navigation">
+    <a class="brand" href="#overview" aria-label="GhostFlow home">
+      <span class="brand-symbol" aria-hidden="true">⌁</span>
+      <span class="brand-type">Ghost<span>Flow</span><small>ARCHITECTURE LAB</small></span>
+    </a>
+    <div class="workspace-label">WORKSPACE <span class="workspace-dot"></span></div>
+    <nav class="side-nav" aria-label="Workspace sections">
+      <button class="nav-link active" type="button" data-page="overview" aria-current="page"><span aria-hidden="true">◫</span> Overview</button>
+      <button class="nav-link" type="button" data-page="trace"><span aria-hidden="true">⌁</span> Request trace</button>
+      <button class="nav-link" type="button" data-page="audit"><span aria-hidden="true">◇</span> AI verification</button>
+      <button class="nav-link" type="button" data-page="quality"><span aria-hidden="true">✓</span> QA workspace</button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="project-meta"><span class="status-indicator" aria-hidden="true"></span><span>RESEARCH MODEL<small>Ghost open-source CMS</small></span></div>
+      <p>Educational companion prototype.<br>Not affiliated with Ghost Foundation.</p>
+      <span class="sidebar-version">BUILD 01 / 2026</span>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div class="breadcrumbs"><span>Systems engineering</span><span class="crumb-sep">/</span><strong id="crumb-current">Overview</strong></div>
+      <div class="top-actions"><span class="snapshot">SOURCE-VERIFIED <span aria-hidden="true">●</span></span><a class="top-link" target="_blank" rel="noopener noreferrer" href="https://github.com/TryGhost/Ghost/blob/main/docs/codebase/runtime-architecture.md">View reference ↗</a></div>
+    </header>
+    <div class="content">
+      <section id="page-overview" class="page" aria-labelledby="overview-title">
+        <div class="eyebrow"><span class="eyebrow-line"></span> CASE STUDY / OPEN-SOURCE SYSTEM</div>
+        <section class="hero">
+          <div class="hero-content">
+            <div class="hero-tag">GHOST CMS <span class="tag-divider">/</span> SYSTEM ANALYSIS</div>
+            <h1 id="overview-title">See the system.<br><em>Verify the boundaries.</em></h1>
+            <p>Trace how Ghost routes public content, Admin API writes, and headless requests — with a transparent simulator built from verified architecture.</p>
+            <div class="hero-cta"><button class="primary-btn" type="button" data-jump="trace">Explore request flow <span aria-hidden="true">↗</span></button><button class="quiet-btn" type="button" data-jump="audit">Review AI audit <span aria-hidden="true">→</span></button></div>
+          </div>
+          <div class="hero-art" aria-hidden="true"><div class="orbit one"></div><div class="orbit two"></div><div class="orbit three"></div><div class="orbit-dot"></div><div class="art-core"><span>G</span><small>GHOST CORE</small></div><div class="hero-art-label">NODE.JS <i>●</i> ONE CORE PROCESS</div></div>
+        </section>
+        <div class="kpi-grid">
+          <article class="kpi"><div class="kpi-heading">CORE RUNTIME <span>01</span></div><strong>1 <small>process</small></strong><p>Ghost Core · Node.js</p></article>
+          <article class="kpi"><div class="kpi-heading">HTTP INTERFACES <span>02</span></div><strong>2 <small>APIs</small></strong><p>Admin + Content</p></article>
+          <article class="kpi"><div class="kpi-heading">PERSISTENCE <span>03</span></div><strong>MySQL <small>8</small></strong><p>Supported production stack</p></article>
+          <article class="kpi"><div class="kpi-heading">FRONTEND <span>04</span></div><strong>React <small>+ legacy Ember</small></strong><p>Admin migration in progress</p></article>
+        </div>
+        <div class="section-intro"><div><div class="eyebrow small">LIVE SYSTEM MODEL</div><h2>Request topology</h2><p>Select a route to reveal the cross-boundary request path.</p></div><span class="label-pill">◉ INTERACTIVE DIAGRAM</span></div>
+        <section class="architecture-card" aria-label="Interactive Ghost architecture diagram">
+          <div class="diagram-toolbar"><div class="scenarios" role="group" aria-label="Select request scenario"><button type="button" class="scenario active" data-scenario="public" aria-pressed="true">Public page</button><button type="button" class="scenario" data-scenario="publish" aria-pressed="false">Publish post</button><button type="button" class="scenario" data-scenario="headless" aria-pressed="false">Headless API</button><button type="button" class="scenario" data-scenario="members" aria-pressed="false">Member signup</button></div><div class="legend"><span><i class="legend-active"></i> Active path</span><span><i class="legend-muted"></i> Other component</span></div></div>
+          <div class="diagram-scroll"><div class="diagram-grid">
+            <div class="diagram-lane client-lane"><div class="lane-heading"><span>01</span> CLIENT / UNTRUSTED</div><button class="arch-node" data-node="reader" type="button"><span class="node-icon">◈</span><span><strong>Public browser</strong><small>Reader / visitor</small></span></button><button class="arch-node" data-node="admin" type="button"><span class="node-icon">▣</span><span><strong>Admin browser</strong><small>React + Ember</small></span></button><button class="arch-node" data-node="headless" type="button"><span class="node-icon">⌘</span><span><strong>Headless client</strong><small>External application</small></span></button><button class="arch-node" data-node="portal" type="button"><span class="node-icon">◎</span><span><strong>Member browser</strong><small>Portal / member UI</small></span></button></div>
+            <div class="lane-chevron" aria-hidden="true">→</div>
+            <div class="diagram-lane edge-lane"><div class="lane-heading"><span>02</span> PUBLIC EDGE</div><button class="arch-node" data-node="ingress" type="button"><span class="node-icon">↳</span><span><strong>NGINX / ingress</strong><small>Conventional setup</small></span></button><button class="arch-node" data-node="edgecache" type="button"><span class="node-icon">◌</span><span><strong>CDN cache</strong><small>Optional / modeled</small></span></button><div class="lane-caption">TLS and edge policy</div></div>
+            <div class="lane-chevron" aria-hidden="true">→</div>
+            <div class="diagram-lane core-lane"><div class="lane-heading"><span>03</span> GHOST CORE <b>ONE PROCESS</b></div><div class="core-nodes"><button class="arch-node" data-node="theme" type="button"><span class="node-icon">▤</span><span><strong>Theme renderer</strong><small>Frontend routes</small></span></button><button class="arch-node" data-node="adminapi" type="button"><span class="node-icon">◧</span><span><strong>Admin API</strong><small>Auth & permissions</small></span></button><button class="arch-node" data-node="contentapi" type="button"><span class="node-icon">≋</span><span><strong>Content API</strong><small>Public read API</small></span></button><button class="arch-node" data-node="members" type="button"><span class="node-icon">♧</span><span><strong>Member routes</strong><small>Frontend app</small></span></button></div><button class="arch-node service-node" data-node="services" type="button"><span class="node-icon">⬡</span><span><strong>Domain services</strong><small>Shared business logic</small></span></button></div>
+            <div class="lane-chevron" aria-hidden="true">→</div>
+            <div class="diagram-lane infra-lane"><div class="lane-heading"><span>04</span> DATA / EFFECTS</div><button class="arch-node" data-node="database" type="button"><span class="node-icon">▥</span><span><strong>MySQL 8</strong><small>Persistent data</small></span></button><button class="arch-node" data-node="storage" type="button"><span class="node-icon">▦</span><span><strong>Media storage</strong><small>Adapter / local</small></span></button><button class="arch-node" data-node="effects" type="button"><span class="node-icon">✧</span><span><strong>Email / webhooks</strong><small>Side effects</small></span></button></div>
+          </div></div>
+          <div class="diagram-foot"><div class="flow-info"><span class="flow-info-dot"></span><span id="active-path-description">Public page → NGINX → Theme → Domain services → MySQL</span></div><p>Click any component for details. Arrows show logical tiers, not literal network hops.</p></div>
+        </section>
+        <div class="under-grid"><article class="insight-card"><span class="card-label">ENGINEERING NOTE / 01</span><h3>Internal boundaries ≠ microservices.</h3><p>Ghost's API, frontend renderer, and services are distinct layers inside one Node.js runtime. Extra Ghost 6 services are optional and separate from this core map.</p><button data-jump="audit" type="button">See verification notes →</button></article><article class="insight-card light"><span class="card-label">ENGINEERING NOTE / 02</span><h3>Never mistake a model for telemetry.</h3><p>Our trace estimates are deterministic illustrative values. They are not actual Ghost performance benchmarks, production metrics, or live API results.</p><button data-jump="trace" type="button">Open simulator →</button></article></div>
+      </section>
+
+      <section id="page-trace" class="page hidden" aria-labelledby="trace-title">
+        <div class="eyebrow"><span class="eyebrow-line"></span> INTERACTIVE PROTOTYPE / 02</div>
+        <div class="page-head"><h1 id="trace-title">Request <em>Trace Lab</em></h1><p>Simulate logical request steps and inspect trust boundaries. This is a deterministic teaching model — not a Ghost deployment.</p></div>
+        <div class="trace-layout"><section class="surface trace-settings" aria-labelledby="trace-settings-title"><div class="surface-head"><span class="card-label">CONFIGURE SCENARIO</span><h2 id="trace-settings-title">Request setup</h2></div><form id="trace-form" novalidate><label for="request-scenario">Scenario</label><select id="request-scenario" name="scenario"><option value="public">Public page / server-rendered</option><option value="publish">Admin post publish</option><option value="headless">Headless Content API</option><option value="members">Member signup</option></select><label for="request-path">Request path</label><input id="request-path" name="path" autocomplete="off" spellcheck="false" maxlength="220" placeholder="/welcome/" value="/welcome/" aria-describedby="request-hint request-error"><small id="request-hint" class="field-hint">Path only; max 180 characters. No network request is sent.</small><p id="request-error" class="form-error" role="alert"></p><label class="switch-row" for="cache-hit"><span><strong>Assume cache hit</strong><small>Only for cacheable public reads</small></span><input type="checkbox" id="cache-hit" name="cache" aria-describedby="cache-hint"><span class="toggle" aria-hidden="true"></span></label><small id="cache-hint" class="field-hint">This models a CDN hit, not Ghost's internal cache implementation.</small><button class="primary-btn simulate-btn" type="submit">Run simulated trace <span aria-hidden="true">↗</span></button><button class="text-button" id="reset-trace" type="button">Reset to defaults</button></form></section>
+        <section class="surface trace-output" aria-labelledby="trace-output-title"><div class="surface-head trace-output-head"><div><span class="card-label">SYNTHETIC EXECUTION</span><h2 id="trace-output-title">Trace results</h2></div><span class="sim-pill">SIMULATED</span></div><div id="trace-empty" class="trace-empty"><div class="empty-glyph">⌁</div><h3>Ready to trace.</h3><p>Select a request, then run the model to reveal its logical execution path.</p></div><div id="trace-results" class="hidden" aria-live="polite"><div class="trace-metrics"><div><span>Modeled latency</span><strong id="trace-latency">—</strong></div><div><span>Components crossed</span><strong id="trace-count">—</strong></div><div><span>Modeled response</span><strong id="trace-status">—</strong></div></div><div class="trace-summary" id="trace-summary"></div><ol id="trace-steps" class="trace-steps"></ol><div class="trace-note">All durations are invented deterministic demonstration values, not measured performance.</div></div></section></div>
+        <div class="under-grid trace-notes"><article class="insight-card"><span class="card-label">BOUNDARY TO WATCH</span><h3>HTTP vs. in-process calls</h3><p>Ghost's Admin and Content APIs expose HTTP boundaries. The public theme can call internal server capabilities without making an external Content API request.</p></article><article class="insight-card light"><span class="card-label">OPERATIONAL TRADE-OFF</span><h3>Scale the edge before the core.</h3><p>Ghost recommends CDN and caching for high-volume sites. This lab models an edge cache hit as a path bypass, but makes no capacity claims.</p></article></div>
+      </section>
+
+      <section id="page-audit" class="page hidden" aria-labelledby="audit-title"><div class="eyebrow"><span class="eyebrow-line"></span> VERIFICATION WORKBOOK / 03</div><div class="page-head"><h1 id="audit-title">AI output, <em>fact-checked.</em></h1><p>A traceable correction log based on Ghost's current documentation and source tree. AI suggestions are hypotheses, not authoritative evidence.</p></div><div class="audit-banner"><span>04</span><div><strong>Architectural assumptions challenged</strong><small>Checked against primary sources · November 2026</small></div><button data-jump="quality" type="button">Continue to QA →</button></div><div id="audit-list" class="audit-list"></div><section class="surface source-panel"><div class="surface-head"><span class="card-label">PRIMARY SOURCES</span><h2>Documentation links</h2></div><ul id="source-list" class="source-list"></ul><p class="source-disclaimer">These links were examined for this assignment. Versioned internal details may change; consult upstream sources before making production claims.</p></section></section>
+
+      <section id="page-quality" class="page hidden" aria-labelledby="quality-title"><div class="eyebrow"><span class="eyebrow-line"></span> TEST EXECUTION / 04</div><div class="page-head"><h1 id="quality-title">Quality <em>workbench.</em></h1><p>Automated model checks plus a manual browser validation matrix. Document only tests you have actually run.</p></div><div class="qa-summary"><div><span class="card-label">BROWSER SELF-CHECKS</span><h2 id="qa-counter">Not executed</h2><p id="qa-status">Run checks to verify validation, routing rules, and basic accessibility markup.</p></div><button id="run-checks" type="button" class="primary-btn">Run browser checks <span>↗</span></button></div><section class="surface qa-results-card" aria-labelledby="qa-results-title"><div class="surface-head"><h2 id="qa-results-title">Automated browser results</h2><span class="label-pill">MODEL + DOM</span></div><div id="qa-check-list" class="qa-check-list"><p class="empty-test">No checks run in this session yet.</p></div></section><section class="surface manual-card" aria-labelledby="manual-title"><div class="surface-head"><h2 id="manual-title">Manual QA evidence checklist</h2><span class="manual-tag">MARK AFTER TESTING</span></div><p class="manual-intro">For the required video, show these checks live in DevTools. These toggles are a local checklist, not proof of cross-browser execution.</p><div id="manual-checks" class="manual-checks"><label><input type="checkbox" data-check="desktop"><span>Desktop layout at 1920 × 1080 — no clipping</span></label><label><input type="checkbox" data-check="tablet"><span>Tablet layout at 768 × 1024 — responsive layout</span></label><label><input type="checkbox" data-check="mobile"><span>Mobile layout at 390 × 844 — navigation and controls work</span></label><label><input type="checkbox" data-check="engine"><span>Second engine (Firefox or Safari) — UI and features verified</span></label><label><input type="checkbox" data-check="console"><span>DevTools Console — zero uncaught errors / broken assets</span></label><label><input type="checkbox" data-check="edge"><span>Empty path, long path, invalid characters — validation shown</span></label><label><input type="checkbox" data-check="keyboard"><span>Keyboard Tab / Enter and labels — usable without mouse</span></label><label><input type="checkbox" data-check="perf"><span>Network waterfall — no blocking external scripts</span></label></div><p id="manual-progress" class="manual-progress" aria-live="polite">0 / 8 manually confirmed in this browser</p></section></section>
+    </div>
+    <footer class="site-footer"><span>GHOSTFLOW / ARCHITECTURE LAB · ORIGINAL STUDENT PROTOTYPE</span><span>MODEL ≠ PRODUCTION IMPLEMENTATION</span></footer>
+  </main>
+</div>
+<dialog id="node-dialog" class="node-dialog" aria-labelledby="dialog-title"><form method="dialog"><button type="submit" class="dialog-close" aria-label="Close details">×</button></form><span class="card-label" id="dialog-zone">SYSTEM COMPONENT</span><h2 id="dialog-title"></h2><p id="dialog-description"></p><button id="dialog-ok" type="button" class="primary-btn">Got it</button></dialog>
+</body>
+</html>
